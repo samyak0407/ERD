@@ -153,4 +153,3 @@ RC_ Models Company orders its products directly from the manufacturers. For exam
 
 ---
 
-Let me know if you need further refinements or help with the ER diagram!
