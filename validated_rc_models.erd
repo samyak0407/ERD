@@ -1,0 +1,94 @@
+erdiagram RC_Models_Company
+
+entity Customer {
+    customer_id key
+    name
+    email
+    status
+    phone_number
+    address
+    date_of_registration
+}
+
+entity Invoice {
+    invoice_id key
+    invoice_date
+    total_amount
+    customer_id fk
+}
+
+entity InvoiceLine {
+    invoice_id key
+    line_no key
+    product_id fk
+    quantity
+}
+
+entity Product {
+    product_id key
+    name
+    category
+    scale
+    price
+    stock_quantity
+    min_stock_quantity
+    manufacturer_id fk
+}
+
+entity Shipment {
+    shipment_id key
+    ship_date
+    status
+    invoice_id fk
+}
+
+entity PurchaseOrder {
+    po_id key
+    order_date
+    status
+    manufacturer_id fk
+}
+
+entity Manufacturer {
+    manufacturer_id key
+    name
+    website
+    phone
+    address
+}
+
+entity Payment {
+    payment_id key
+    invoice_id fk
+    payment_date
+    amount
+    status
+}
+
+relationship Generates {
+    Customer [1] -> Invoice [N]
+}
+
+relationship Contains {
+    Invoice [1] -> InvoiceLine [N]
+}
+
+relationship Includes {
+    InvoiceLine [N] -> Product [1]
+}
+
+relationship Ships {
+    Invoice [1] -> Shipment [N]
+}
+
+relationship Orders {
+    Shipment [N] -> PurchaseOrder [1]
+}
+
+relationship Supplies {
+    Manufacturer [1] -> Product [N]
+}
+
+relationship Processes {
+    Invoice [1] -> Payment [1]
+}
